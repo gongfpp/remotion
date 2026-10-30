@@ -17,6 +17,11 @@ export const isFlakyError = (err: Error): boolean => {
 		return true;
 	}
 
+	// @remotion/media frame extraction can time out on a stalled remote source (issue #12818).
+	if (message.includes('Timeout while extracting frame')) {
+		return true;
+	}
+
 	if (message.includes('but the server sent no data')) {
 		return true;
 	}
